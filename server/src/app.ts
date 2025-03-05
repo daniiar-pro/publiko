@@ -1,4 +1,8 @@
-import express from 'express'
+import express, {
+  type Request,
+  type Response,
+  type RequestHandler,
+} from 'express'
 import {
   createExpressMiddleware,
   type CreateExpressContextOptions,
@@ -41,15 +45,22 @@ export default function createApp(db: Database) {
     })
   )
 
-  if (config.env === 'development') {
-    app.use('/api/v1/trpc-panel', (_, res) =>
-      res.send(
-        renderTrpcPanel(appRouter, {
-          url: `http://localhost:${config.port}/api/v1/trpc`,
-          transformer: 'superjson',
-        })
-      )
+  const trpcPanelHandler: RequestHandler = (
+    req: Request,
+    res: Response
+  ): void => {
+    // Call res.send without returning its value.
+    res.send(
+      renderTrpcPanel(appRouter, {
+        url: `http://localhost:${config.port}/api/v1/trpc`,
+        transformer: 'superjson',
+      })
     )
+  }
+
+  if (config.env === 'development') {
+    // Mount the handler on the desired path.
+    app.use('/api/v1/trpc-panel', trpcPanelHandler)
   }
 
   return app

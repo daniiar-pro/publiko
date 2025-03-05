@@ -5,6 +5,7 @@
   
     "compilerOptions": {
       "strict": true,
+      "lib": ["ES2022"],
       "paths": {
         "@server/*": ["./src/*"],
         "@tests/*": ["./tests/*"]
