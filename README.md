@@ -13,9 +13,9 @@ Note: Since this is our first release (MVP, v1), we won't  have a lot of feature
 
 ### Upcomings (v2)
 
-    1.  Allowing users to report specific posts that they found contain misinformation or policy violations. Which allows Publiko users to have trusted source of information
+   1.  Allowing users to report specific posts that they found contain misinformation or policy violations. Which allows Publiko users to have trusted source of information
      
-    2.  Donation: Users can donate to the author of posts if they found the author’s experience helpful. Users valuable experiences will be rewarded
+   2.  Donation: Users can donate to the author of posts if they found the author’s experience helpful. Users valuable experiences will be rewarded
 
 
 ## Features
