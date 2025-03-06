@@ -40,8 +40,8 @@ Note: Since this is our first release (MVP, v1), we won't  have a lot of feature
 1. **Clone the repository:**
 
    ```bash
-   git clone <https://github.com/daniiar-pro/publiko.git>
-   cd <server>
+   git clone https://github.com/daniiar-pro/publiko.git
+   cd server
 
    ```
 
