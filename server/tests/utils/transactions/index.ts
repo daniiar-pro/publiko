@@ -2,13 +2,6 @@ import { Kysely, Transaction } from 'kysely'
 import beginTransaction from './beginTransaction'
 import createSavePoint from './createSavePoint'
 
-// NOTE: This module has been added to the template to allow using rollbacked
-// tests without the need to restructure the tests or think about transactions
-// while handling some tricky nested transaction logic.
-// It contains various JS/TS concepts that even intermediate developers would
-// not be familiar with. You can treat it as a black box and just use the
-// wrapInRollbacks function in your tests.
-
 const symbolOriginal = Symbol('original')
 const symbolSetInstance = Symbol('setInstance')
 const symbolOverride = Symbol('override')
@@ -41,9 +34,6 @@ export async function wrapInRollbacks<T = any, K extends Kysely<T> = any>(
 
     await preTestState.save()
 
-    // Override the transaction method to use savepoints for nested transactions.
-    // This allows using transactions inside our application code without
-    // worrying about the test suite's transaction.
     dbProxy[symbolOverride]('transaction', () => ({
       isTransaction: () => true,
       execute: async <N>(fn: (trx: Transaction<T>) => N) => {
@@ -61,7 +51,6 @@ export async function wrapInRollbacks<T = any, K extends Kysely<T> = any>(
       },
     }))
 
-    // Vitest uses the returned function in the afterEach hook
     return preTestState.rollback
   })
 

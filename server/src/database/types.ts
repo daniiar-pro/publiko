@@ -12,6 +12,11 @@ export type Generated<T> =
 
 export type Timestamp = ColumnType<Date, Date | string, Date | string>
 
+export interface Comment {
+  content: string
+  id: Generated<number>
+}
+
 export interface PostRequests {
   adminId: number | null
   content: string
@@ -52,6 +57,7 @@ export interface Users {
 }
 
 export interface DB {
+  comment: Comment
   postRequests: PostRequests
   posts: Posts
   reports: Reports

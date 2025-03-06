@@ -4,7 +4,6 @@ import { userRepository } from './userRepository'
 
 export type RepositoryFactory = <T>(db: Database) => T
 
-//  index of all repositories for provideRepos
 const repositories = { postRepository, userRepository }
 
 export type RepositoriesFactories = typeof repositories

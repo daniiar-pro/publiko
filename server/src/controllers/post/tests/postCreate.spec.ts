@@ -12,10 +12,8 @@ const db = await wrapInRollbacks(createTestDatabase())
 const TABLE_USERS = 'users'
 
 it('should throw an error if user is not authenticated', async () => {
-  // ARRANGE
   const { create } = createCaller(requestContext({ db }))
 
-  // ACT & ASSERT
   await expect(
     create({
       title: 'My Special post',
@@ -25,17 +23,14 @@ it('should throw an error if user is not authenticated', async () => {
 })
 
 it('should create a persisted post', async () => {
-  // ARRANGE
   const [user] = await insertAll(db, TABLE_USERS, fakeUser())
   const { create } = createCaller(authContext({ db }, user))
 
-  // ACT
   const postReturned = await create({
     title: 'My Post',
     content: 'This is the content.',
   })
 
-  // ASSERT
   expect(postReturned).toMatchObject({
     id: expect.any(Number),
     title: 'My Post',

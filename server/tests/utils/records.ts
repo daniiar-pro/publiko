@@ -33,7 +33,6 @@ export const clearTables = async <
     return
   }
 
-  // assume PostgreSQL, truncate all tables
   const tableNamesSql = sql.join(tableNames.map(sql.table), sql.raw(', '))
 
   await sql`TRUNCATE TABLE ${tableNamesSql} CASCADE;`.execute(db)
@@ -68,7 +67,7 @@ export const selectAll = <N extends keyof DB, T extends DatabaseTypes<N>>(
   const query = db.selectFrom(tableName).selectAll()
 
   return expression
-    ? // shortcut which works as long as there are no table aliases
+    ? 
       query.where(expression as any).execute()
     : query.execute()
 }

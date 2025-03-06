@@ -20,7 +20,6 @@ vi.mock('jsonwebtoken', () => ({
   },
 }))
 
-// we do not need a database for this test
 const db = {} as any
 const authenticated = createCaller(authContext({ db }))
 
@@ -47,7 +46,6 @@ it('should throw an error if user is not logged in', async () => {
   const unauthenticated = createCaller(requestContext({ db }))
 
   await expect(unauthenticated.testCall()).rejects.toThrow(
-    // any authentication-like error
     /login|log in|logged in|authenticate|unauthorized/i
   )
 })

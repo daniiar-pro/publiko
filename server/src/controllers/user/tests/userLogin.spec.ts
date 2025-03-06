@@ -26,7 +26,6 @@ it('returns a token if the password matches', async () => {
     password: PASSWORD_CORRECT,
   })
 
-  // jwt
   expect(accessToken).toEqual(expect.any(String))
   expect(accessToken.slice(0, 3)).toEqual('eyJ')
 })
@@ -37,7 +36,7 @@ it('should throw an error for non-existant user', async () => {
       email: 'nonexisting@user.com',
       password: PASSWORD_CORRECT,
     })
-  ).rejects.toThrow() // some error
+  ).rejects.toThrow()
 })
 
 it('should throw an error for incorrect password', async () => {
@@ -79,7 +78,7 @@ it('allows logging in with different email case', async () => {
 it('allows logging in with surrounding white space', async () => {
   await expect(
     login({
-      email: ` \t ${userSeed.email}\t `, // tabs and spaces
+      email: ` \t ${userSeed.email}\t `,
       password: PASSWORD_CORRECT,
     })
   ).resolves.toEqual(expect.anything())

@@ -12,7 +12,6 @@ export const postSchema = z.object({
 
 export const postKeysAll = Object.keys(postSchema.shape) as (keyof Posts)[]
 
-// export const articleKeysPublic = articleKeysAll
 export const postKeysPublic = postKeysAll
 
 export type PostPublic = Pick<

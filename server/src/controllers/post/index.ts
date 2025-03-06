@@ -1,10 +1,12 @@
 import { router } from '@server/trpc'
 import create from './create'
-import findAll from './findAll'
-import get from './get'
+import getAllPosts from './getAllPosts'
+import getPost from './getPost'
+import { deletePost } from './deletePost'
 
 export default router({
   create,
-  findAll,
-  get,
+  getAllPosts,
+  getPost,
+  deletePost,
 })

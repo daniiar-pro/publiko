@@ -37,13 +37,20 @@ export function postRepository(db: Database) {
     },
 
     async hasUserId(postId: number, authorId: number): Promise<boolean> {
-      const article = await db
+      const post = await db
         .selectFrom(POSTS_TABLE)
         .select('authorId')
         .where('id', '=', postId)
         .executeTakeFirst()
 
-      return article?.authorId === authorId
+      return post?.authorId === authorId
+    },
+
+    async delete(postId: number): Promise<void> {
+      await db
+        .deleteFrom(POSTS_TABLE)
+        .where('id', '=', postId)
+        .executeTakeFirstOrThrow()
     },
   }
 }

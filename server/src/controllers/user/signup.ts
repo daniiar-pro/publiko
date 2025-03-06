@@ -24,11 +24,9 @@ export default publicProcedure
         ...user,
         password: passwordHash,
       })
-      // handling errors using the Promise.catch method
       .catch((error: unknown) => {
         assertError(error)
 
-        // wrapping an ugly error into a user-friendly one
         if (error.message.includes('duplicate key')) {
           throw new TRPCError({
             code: 'BAD_REQUEST',

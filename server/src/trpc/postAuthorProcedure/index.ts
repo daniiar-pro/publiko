@@ -5,7 +5,7 @@ import { postRepository } from '@server/repositories/postRepository'
 import { idSchema } from '@server/entities/shared'
 import provideRepos from '../provideRepos'
 
-export const articleAuthorProcedure = authenticatedProcedure
+export const postAuthorProcedure = authenticatedProcedure
   .use(
     provideRepos({
       postRepository,
@@ -17,15 +17,12 @@ export const articleAuthorProcedure = authenticatedProcedure
     })
   )
   .use(async ({ input: { id }, ctx: { authUser, repos }, next }) => {
-    const hasSameUserId = await repos.postRepository.hasUserId(
-      id,
-      authUser.id
-    )
+    const hasSameUserId = await repos.postRepository.hasUserId(id, authUser.id)
 
     if (!hasSameUserId) {
       throw new TRPCError({
         code: 'UNAUTHORIZED',
-        message: 'Article does not belong to the user',
+        message: 'Post does not belong to the user',
       })
     }
 

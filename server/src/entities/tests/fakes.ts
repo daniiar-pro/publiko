@@ -32,31 +32,13 @@ export const fakeAuthUser = <T extends Partial<AuthUser>>(
 })
 
 /**
- * Generates a fake article with some default test data.
+ * Generates a fake post with some default test data.
  * @param overrides userId and any properties that should be different from default fake data.
  */
-export const fakePost = <T extends Partial<Insertable<Posts>>>(
-  overrides: T
-) =>
+export const fakePost = <T extends Partial<Insertable<Posts>>>(overrides: T) =>
   ({
     title: random.string(),
     content: random.paragraph(),
     authorId: randomId(),
     ...overrides,
   }) satisfies Insertable<Posts>
-
-/**
- * Generates a fake comment with some default test data.
-//  * @param overrides articleId and any properties that should be different from default fake data.
-//  */
-// export const fakeComment = <T extends Partial<Insertable<Comment>>>(
-//   overrides: T
-// ) =>
-//   ({
-//     content: random.paragraph({ sentences: 2 }),
-//     articleId: randomId(),
-//     userId: randomId(),
-//     isSpam: false,
-//     ...overrides,
-//     createdAt: new Date(),
-//   }) satisfies Insertable<Comment>

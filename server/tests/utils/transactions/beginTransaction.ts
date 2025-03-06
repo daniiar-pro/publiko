@@ -14,13 +14,11 @@ export default async function beginTransaction<T>(db: Kysely<T>) {
       return result.promise
     })
     .catch((error) => {
-      // throw errors for failed database connections
       if (error.code === 'ECONNREFUSED') {
         connection.reject(new Error('Could not connect to the database.'))
       }
 
-      // Don't do anything here. Just swallow the exception as
-      // this is an expected rollback error.
+
     })
 
   const trx = await connection.promise

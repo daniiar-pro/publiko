@@ -22,5 +22,4 @@ export async function up(db: Kysely<any>) {
 
 export async function down(db: Kysely<any>) {
   await db.schema.dropTable('posts').ifExists().execute()
-
 }

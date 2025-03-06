@@ -23,20 +23,13 @@ function getUserFromToken(token: string) {
 
 export const authenticatedProcedure = publicProcedure.use(({ ctx, next }) => {
   if (ctx.authUser) {
-    // If we have an authenticated user, we can proceed.
     return next({
       ctx: {
-        // This is a bit of a type hack.
-        // At this point ctx.authUser is AuthUser (no longer undefined).
-        // If we make sure that this middleware always returns
-        // ctx with authUser not undefined, then all routes using this
-        // middleware will also know that authUser is defined.
         authUser: ctx.authUser,
       },
     })
   }
 
-  // we depend on having an Express request object
   if (!ctx.req) {
     const message =
       config.env === 'development' || config.env === 'test'
@@ -49,10 +42,8 @@ export const authenticatedProcedure = publicProcedure.use(({ ctx, next }) => {
     })
   }
 
-  // if we do not have an authenticated user, we will try to authenticate
   const token = ctx.req.header('Authorization')?.replace('Bearer ', '')
 
-  // if there is no token, we will throw an error
   if (!token) {
     throw new TRPCError({
       code: 'UNAUTHORIZED',

@@ -40,7 +40,7 @@ it('should require a valid email', async () => {
         email: 'user-email-invalid',
       })
     )
-  ).rejects.toThrow(/email/i) // throws out some error complaining about "email"
+  ).rejects.toThrow(/email/i)
 })
 
 it('should require a password with at least 8 characters', async () => {
@@ -50,7 +50,7 @@ it('should require a password with at least 8 characters', async () => {
         password: 'pas.123',
       })
     )
-  ).rejects.toThrow(/password/i) // throws out some error complaining about "password"
+  ).rejects.toThrow(/password/i)
 })
 
 it('throws an error for invalid email', async () => {
@@ -71,7 +71,6 @@ it('stores lowercased email', async () => {
     email: user.email.toUpperCase(),
   })
 
-  // get user with original lowercase email
   const userSaved = await selectAll(db, TABLE_USERS, (eb) =>
     eb('email', '=', user.email)
   )
@@ -83,7 +82,7 @@ it('stores email with trimmed whitespace', async () => {
   const user = fakeUser()
   await signup({
     ...user,
-    email: ` \t ${user.email}\t `, // tabs and spaces
+    email: ` \t ${user.email}\t `,
   })
 
   const userSaved = await selectAll(db, TABLE_USERS, (eb) =>
@@ -96,10 +95,8 @@ it('stores email with trimmed whitespace', async () => {
 it('throws an error for duplicate email', async () => {
   const email = random.email()
 
-  // signup once
   await signup(fakeUser({ email }))
 
-  // expect that the second signup will throw an error
   await expect(signup(fakeUser({ email }))).rejects.toThrow(
     /email already exists/i
   )

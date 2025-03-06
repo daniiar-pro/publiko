@@ -41,10 +41,8 @@ export default publicProcedure
       })
     }
 
-    // What we will include in the token.
     const payload = prepareTokenPayload(user)
 
-    // const accessToken = (jsonwebtoken.sign as any)(payload, tokenKey, expiresIn)
     const accessToken = jsonwebtoken.sign(payload, tokenKey, {
       expiresIn,
     } as any)

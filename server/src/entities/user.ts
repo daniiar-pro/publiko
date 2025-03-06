@@ -15,7 +15,6 @@ export const userSchema = z.object({
   username: z.string().min(1).max(500),
 })
 
-// List keys that we will return to the client
 export const userKeysAll = Object.keys(userSchema.shape) as (keyof Users)[]
 
 export const userKeysPublic = ['id', 'username'] as const
@@ -25,6 +24,5 @@ export type UserPublic = Pick<
   (typeof userKeysPublic)[number]
 >
 
-// a specifict schema for authenticated user that is used in JWT
 export const authUserSchema = userSchema.pick({ id: true })
 export type AuthUser = z.infer<typeof authUserSchema>

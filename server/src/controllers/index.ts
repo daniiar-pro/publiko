@@ -4,7 +4,7 @@ import post from './post'
 
 export const appRouter = router({
   user,
-  post
+  post,
 })
 
 export type AppRouter = typeof appRouter

@@ -11,7 +11,6 @@ const db = await wrapInRollbacks(createTestDatabase())
 
 const TABLE_POSTS = 'posts'
 const TABLE_USERS = 'users'
-// a pair of users and posts we will use in our test cases
 const [user, userOther] = await insertAll(db, TABLE_USERS, [
   fakeUser(),
   fakeUser(),
@@ -22,13 +21,11 @@ const [post, postOther] = await insertAll(db, TABLE_POSTS, [
   fakePost({ authorId: userOther.id }),
 ])
 
-const { get } = createCaller(authContext({ db }, user))
+const { getPost } = createCaller(authContext({ db }, user))
 
 it('should return a post', async () => {
-  // When (ACT)
-  const postResponse = await get(post.id)
+  const postResponse = await getPost(post.id)
 
-  // Then (ASSERT)
   expect(postResponse).toMatchObject({
     id: post.id,
     title: post.title,
@@ -40,6 +37,5 @@ it('should return a post', async () => {
 it('should throw an error if the post does not exist', async () => {
   const nonExistantId = post.id + postOther.id
 
-  // When (ACT)
-  await expect(get(nonExistantId)).rejects.toThrowError(/not found/i)
+  await expect(getPost(nonExistantId)).rejects.toThrowError(/not found/i)
 })

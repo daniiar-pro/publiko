@@ -1,10 +1,10 @@
 import { router } from '@server/trpc'
 import login from './login'
 import signup from './signup'
-import testIt from './testIt'
+import logout from './logout'
 
 export default router({
   login,
   signup,
-  testIt
+  logout,
 })

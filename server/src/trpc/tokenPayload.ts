@@ -1,9 +1,6 @@
 import { authUserSchema, type AuthUser } from '@server/entities/user'
 import { z } from 'zod'
 
-// We have move out the token payload logic into a separate file.
-// As we would like to keep both sides of token handling in one place.
-
 const tokenPayloadSchema = z.object({
   user: authUserSchema,
 })

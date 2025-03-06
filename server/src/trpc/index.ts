@@ -9,17 +9,11 @@ import type { Repositories } from '@server/repositories'
 
 export type Context = {
   db: Database
-
-  // Express types. These are optional as
-  // vast majority of requests do not need them.
-  // Then it is a bit easier to test procedures.
   req?: Request
   res?: Response
 
-  // We can also add our own custom context properties.
   authUser?: AuthUser
 
-  // For providing repos in a slightly easier to test way
   repos?: Partial<Repositories>
 }
 
