@@ -13,6 +13,7 @@
     "vite": "^6.1.0"
   },
   "dependencies": {
-    "@trpc/client": "^10.45.2"
+    "@trpc/client": "^10.45.2",
+    "superjson": "^2.2.2"
   }
 }
