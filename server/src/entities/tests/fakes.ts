@@ -1,4 +1,4 @@
-import type { Users } from '@server/database/types'
+import type { Users, Posts } from '@server/database/types'
 import type { Insertable } from 'kysely'
 import { random } from '@tests/utils/random'
 import type { AuthUser } from '../user'
@@ -33,17 +33,17 @@ export const fakeAuthUser = <T extends Partial<AuthUser>>(
 
 /**
  * Generates a fake article with some default test data.
-//  * @param overrides userId and any properties that should be different from default fake data.
-//  */
-// export const fakeArticle = <T extends Partial<Insertable<Posts>>>(
-//   overrides: T
-// ) =>
-//   ({
-//     title: random.string(),
-//     content: random.paragraph(),
-//     userId: randomId(),
-//     ...overrides,
-//   }) satisfies Insertable<Posts>
+ * @param overrides userId and any properties that should be different from default fake data.
+ */
+export const fakePost = <T extends Partial<Insertable<Posts>>>(
+  overrides: T
+) =>
+  ({
+    title: random.string(),
+    content: random.paragraph(),
+    authorId: randomId(),
+    ...overrides,
+  }) satisfies Insertable<Posts>
 
 /**
  * Generates a fake comment with some default test data.

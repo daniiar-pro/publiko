@@ -10,19 +10,19 @@ type Pagination = {
 const POSTS_TABLE = 'posts'
 export function postRepository(db: Database) {
   return {
-    async create(article: Insertable<Posts>): Promise<PostPublic> {
+    async create(post: Insertable<Posts>): Promise<PostPublic> {
       return db
         .insertInto(POSTS_TABLE)
-        .values(article)
+        .values(post)
         .returning(postKeysPublic)
         .executeTakeFirstOrThrow()
     },
 
-    async findById(articleId: number): Promise<PostPublic | undefined> {
+    async findById(postId: number): Promise<PostPublic | undefined> {
       return db
         .selectFrom(POSTS_TABLE)
         .select(postKeysPublic)
-        .where('id', '=', articleId)
+        .where('id', '=', postId)
         .executeTakeFirst()
     },
 
@@ -36,11 +36,11 @@ export function postRepository(db: Database) {
         .execute()
     },
 
-    async hasUserId(articleId: number, authorId: number): Promise<boolean> {
+    async hasUserId(postId: number, authorId: number): Promise<boolean> {
       const article = await db
         .selectFrom(POSTS_TABLE)
         .select('authorId')
-        .where('id', '=', articleId)
+        .where('id', '=', postId)
         .executeTakeFirst()
 
       return article?.authorId === authorId
