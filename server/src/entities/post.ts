@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import type { Selectable } from 'kysely'
+import type { Selectable, Updateable } from 'kysely'
 import type { Posts } from '@server/database/types'
 import { idSchema } from './shared'
 
@@ -16,5 +16,10 @@ export const postKeysPublic = postKeysAll
 
 export type PostPublic = Pick<
   Selectable<Posts>,
+  (typeof postKeysPublic)[number]
+>
+
+export type PostUpdate = Pick<
+  Updateable<Posts>,
   (typeof postKeysPublic)[number]
 >

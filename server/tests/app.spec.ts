@@ -13,3 +13,5 @@ afterAll(() => {
 it('can launch the app', async () => {
   await supertest(app).get('/api/health').expect(200, 'OK')
 })
+
+

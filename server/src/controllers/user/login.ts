@@ -37,7 +37,7 @@ export default publicProcedure
     if (!passwordMatch) {
       throw new TRPCError({
         code: 'UNAUTHORIZED',
-        message: 'Incorrect password. Please try again.',
+        message: 'Incorrect password or email. Please try again.',
       })
     }
 
